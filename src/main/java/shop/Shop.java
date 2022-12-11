@@ -35,12 +35,13 @@ public class Shop {
     public void buyItems(String itemName, Integer quantity) throws InvalidItemException {
         for (var item:items.entrySet()) {
             if(item.getKey().getName().equals(itemName)) {
-                if(quantity>item.getValue()) {
+                if(quantity>item.getValue() || quantity < 0) {
                     throw new InvalidItemException();
                 }
                 if(loggedInCustomer.getBalance() >= item.getKey().getPrice() * quantity) {
                     loggedInCustomer.setBalance(loggedInCustomer.getBalance() - item.getKey().getPrice() * quantity);
                     item.setValue(item.getValue() - quantity);
+                    return;
                 }
                 else {
                     throw new InvalidItemException();
@@ -48,6 +49,7 @@ public class Shop {
 
             }
         }
+        throw new InvalidItemException();
     }
 
     public Customer login(String name, String password) throws InvalidLoginException{
