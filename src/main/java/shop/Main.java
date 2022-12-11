@@ -24,6 +24,7 @@ public class Main {
         mainMenu(shop1,currentCustomer);
     }
 
+    //Test Kommentar für GIT
     public static String scanStringInput() {
         Scanner input1 = new Scanner(System.in);
         return input1.nextLine();
